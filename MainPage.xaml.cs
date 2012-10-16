@@ -33,10 +33,17 @@ namespace CustomControls
         /// property is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            HelloWorldWithEvents.Blinked += (object sender, EventArgs args) =>
-            {
-                System.Diagnostics.Debug.WriteLine("HelloWorldWithEvents Blinked");
-            };
+            HelloWorldWithEvents.Blinked += HelloWorldWithEvents_Blinked;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            HelloWorldWithEvents.Blinked -= HelloWorldWithEvents_Blinked;
+        }
+
+        private void HelloWorldWithEvents_Blinked(object sender, EventArgs args)
+        {
+            System.Diagnostics.Debug.WriteLine("HelloWorldWithEvents Blinked");
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
